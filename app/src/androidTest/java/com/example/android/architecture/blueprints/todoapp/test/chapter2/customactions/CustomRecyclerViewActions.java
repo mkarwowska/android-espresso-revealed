@@ -113,4 +113,62 @@ public interface CustomRecyclerViewActions extends ViewAction {
             return "scroll to last holder in RecyclerView";
         }
     }
+
+    // Exercise 7 page 58
+    // RecyclerView action that verifies that the TO-DO item is not present in the list.
+
+    class ToDoItemWithTitleIsNotPresentInTheList implements CustomRecyclerViewActions {
+
+        private String toDoTitle;
+
+        public ToDoItemWithTitleIsNotPresentInTheList(String toDoTitle) {
+            this.toDoTitle = toDoTitle;
+        }
+
+        public static ViewAction toDoItemWithTitleIsNotPresentInTheList(final String toDoTitle) {
+            return actionWithAssertions(new ToDoItemWithTitleIsNotPresentInTheList(toDoTitle));
+        }
+
+        @Override
+        public Matcher<View> getConstraints() {
+            return allOf(isAssignableFrom(RecyclerView.class), isDisplayed());
+        }
+
+        @Override
+        public String getDescription() {
+            return "Verify that TO-DO item with title: \"" + toDoTitle + "\" is not present on the list.";
+        }
+
+        @Override
+        public void perform(UiController uiController, View view) {
+            try {
+                RecyclerView recyclerView = (RecyclerView) view;
+                RecyclerView.Adapter adapter = recyclerView.getAdapter();
+                if (adapter instanceof TasksFragment.TasksAdapter) {
+                    for (int i = 0; i < adapter.getItemCount(); i++) {
+                        View taskItemView = recyclerView.getLayoutManager().findViewByPosition(i);
+                        if (taskItemView != null) {
+                            TextView textView = taskItemView.findViewById(R.id.todo_title);
+                            if (textView != null && textView.getText() != null) {
+                                if (textView.getText().toString().equals(toDoTitle)) {
+                                    throw new Throwable(
+                                            "TO-DO item with title \"" + toDoTitle + "\" is present on the list.");
+                                }
+                            } else {
+                                assertThat(!taskItemView.isShown());
+                            }
+                        }
+                    }
+                }
+                uiController.loopMainThreadForAtLeast(ViewConfiguration.getTapTimeout());
+            } catch (Throwable e) {
+                throw new PerformException.Builder().withActionDescription(this.getDescription())
+                        .withViewDescription(HumanReadables.describe(view)).withCause(e).build();
+            }
+        }
+
+        private void assertThat(boolean shown) {
+        }
+
+    }
 }

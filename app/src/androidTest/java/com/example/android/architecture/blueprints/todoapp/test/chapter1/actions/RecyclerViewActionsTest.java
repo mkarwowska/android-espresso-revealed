@@ -2,18 +2,23 @@ package com.example.android.architecture.blueprints.todoapp.test.chapter1.action
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.action.GeneralLocation;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.test.BaseTest;
 import com.example.android.architecture.blueprints.todoapp.test.chapter2.customactions.CustomRecyclerViewActions;
+import com.example.android.architecture.blueprints.todoapp.test.chapter2.customactions.CustomSwipeActions;
 
 import org.junit.Test;
+
+import java.util.concurrent.ExecutionException;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
@@ -21,6 +26,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.android.architecture.blueprints.todoapp.test.chapter2.customactions.CustomClickAction.clickElementWithVisibility;
 import static com.example.android.architecture.blueprints.todoapp.test.chapter2.customactions.CustomRecyclerViewActions.ClickTodoCheckBoxWithTitleViewAction.clickTodoCheckBoxWithTitle;
+import static com.example.android.architecture.blueprints.todoapp.test.chapter2.customactions.CustomRecyclerViewActions.ToDoItemWithTitleIsNotPresentInTheList.toDoItemWithTitleIsNotPresentInTheList;
 import static com.example.android.architecture.blueprints.todoapp.test.chapter4.conditionwatchers.ConditionWatchers.waitForElement;
 import static com.example.android.architecture.blueprints.todoapp.test.chapter4.conditionwatchers.ConditionWatchers.waitForElementIsGone;
 
@@ -30,6 +36,8 @@ import static com.example.android.architecture.blueprints.todoapp.test.chapter4.
 public class RecyclerViewActionsTest extends BaseTest {
 
     private ViewInteraction todoSavedSnackbar = onView(withText(R.string.successfully_saved_task_message));
+    private CustomSwipeActions customSwipeActions = new CustomSwipeActions();
+
 
     @Test
     public void addNewToDos() throws Exception {
@@ -83,5 +91,25 @@ public class RecyclerViewActionsTest extends BaseTest {
             waitForElement(todoSavedSnackbar, 3000);
         }
         waitForElementIsGone(todoSavedSnackbar, 3000);
+    }
+
+    // Chapter 2 - Exercise 6 page 53
+    @Test
+    public void refreshToDoList() throws Exception {
+        generateToDos(3);
+        onView(withId(R.id.tasks_list)).perform(swipeDown());
+    }
+
+    @Test
+    public void refreshToDoLis2() throws Exception {
+        generateToDos(3);
+        onView(withId(R.id.tasks_list)).perform(customSwipeActions.swipeCustom(5, GeneralLocation.TOP_CENTER,GeneralLocation.CENTER));
+    }
+
+    // Chapter 2 - Exercise 7 page 58
+    @Test
+    public void verifyThatItemIsNotPresentOnTheList() throws Exception{
+        generateToDos(2);
+        onView(withId(R.id.tasks_list)).perform(toDoItemWithTitleIsNotPresentInTheList("item 11"));
     }
 }
