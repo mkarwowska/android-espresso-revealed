@@ -1,10 +1,15 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter3.testsamples
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.action.ViewActions.click
+import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers.*
+import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.R.id.*
 import com.example.android.architecture.blueprints.todoapp.test.BaseTest
 import com.example.android.architecture.blueprints.todoapp.test.chapter1.data.TestData
+import com.example.android.architecture.blueprints.todoapp.test.chapter2.custommatchers.RecyclerViewMatchers.withTitle
 import com.example.android.architecture.blueprints.todoapp.test.chapter3.*
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.Before
@@ -18,9 +23,12 @@ class ViewActionsKotlinDslTest : BaseTest() {
 
     private var toDoTitle = ""
     private var toDoDescription = ""
+    val editedToDoTitle = "Edited $toDoTitle"
+    val editedToDoDescription = "Edited $toDoDescription"
 
     // ViewInteractions used in tests
     private val addFab = viewWithId(fab_add_task)
+    private val editFab = viewWithId(fab_edit_task)
     private val taskTitleField = viewWithId(add_task_title)
     private val taskDescriptionField = viewWithId(add_task_description)
     private val editDoneFab = viewWithId(fab_edit_task_done)
@@ -30,6 +38,8 @@ class ViewActionsKotlinDslTest : BaseTest() {
     private val activeFilterOption = onView(allOf(withId(title), withText("Active")))
     private val completedFilterOption = onView(allOf(withId(title), withText("Completed")))
     private val snackbar = viewWithId(snackbar_text)
+    private val toDoList = viewWithId(tasks_list)
+
 
     @Before
     override fun setUp() {
@@ -77,5 +87,24 @@ class ViewActionsKotlinDslTest : BaseTest() {
         snackbar.waitForGone()
         // verifying new TO-DO with title is shown in the TO-DO list
         viewWithText(toDoTitle).checkDisplayed()
+    }
+
+    // Chapter 3 Exercise 11 - page 84
+    @Test
+    fun editsToDo() {
+        // add new TO-DO
+        addFab.click()
+        taskTitleField.wait().type(toDoTitle).closeKeyboard()
+        taskDescriptionField.type(toDoDescription).closeKeyboard()
+        editDoneFab.click()
+        snackbar.waitForGone()
+        // edit TO-DO
+        toDoList.actionOnItem(withTitle(toDoTitle), click())
+        editFab.click()
+        taskTitleField.replace(editedToDoTitle).closeKeyboard()
+        taskDescriptionField.replace(editedToDoDescription).closeKeyboard()
+        editDoneFab.click()
+        // verify edited TO-DO is shown
+        viewWithText(editedToDoTitle).checkDisplayed()
     }
 }

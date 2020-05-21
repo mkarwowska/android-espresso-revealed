@@ -103,7 +103,7 @@ public class RecyclerViewActionsTest extends BaseTest {
     @Test
     public void refreshToDoLis2() throws Exception {
         generateToDos(3);
-        onView(withId(R.id.tasks_list)).perform(customSwipeActions.swipeCustom(5, GeneralLocation.TOP_CENTER,GeneralLocation.CENTER));
+        onView(withId(R.id.tasks_list)).perform(customSwipeActions.swipeCustom(5, GeneralLocation.TOP_CENTER, GeneralLocation.CENTER));
     }
 
     // Chapter 2 - Exercise 7 page 58

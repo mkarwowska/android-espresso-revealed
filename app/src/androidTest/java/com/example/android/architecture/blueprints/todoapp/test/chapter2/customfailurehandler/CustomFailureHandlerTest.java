@@ -19,7 +19,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-public class CustomFailureHandlerTest extends BaseTest{
+public class CustomFailureHandlerTest extends BaseTest {
 
     @Before
     public void setUp() throws Exception{

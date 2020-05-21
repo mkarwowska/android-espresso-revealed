@@ -167,8 +167,6 @@ public interface CustomRecyclerViewActions extends ViewAction {
             }
         }
 
-        private void assertThat(boolean shown) {
-        }
-
+        private void assertThat(boolean shown) { }
     }
 }
