@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.test.espresso.FailureHandler;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.base.DefaultFailureHandler;
+import android.util.Log;
 import android.view.View;
 
 import org.hamcrest.Matcher;
@@ -25,6 +26,7 @@ public class CustomFailureHandler implements FailureHandler{
             delegate.handle(error, viewMatcher);
         } catch (NoMatchingViewException e) {
             // For example done device dump, take screenshot, etc.
+            Log.e("CustomFailure", "Show this message for each fail");
             throw e;
         }
     }
