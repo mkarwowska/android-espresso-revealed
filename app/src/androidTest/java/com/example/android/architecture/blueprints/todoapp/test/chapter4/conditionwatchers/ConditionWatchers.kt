@@ -1,10 +1,13 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter4.conditionwatchers
 
+import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
+import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.view.View
 import android.widget.TextView
 import com.azimolabs.conditionwatcher.ConditionWatcher
@@ -70,6 +73,33 @@ object ConditionWatchers {
     fun waitForElement(
             interaction: ViewInteraction,
             timeout: Int = 5000): ViewInteraction {
+        ConditionWatcher.setTimeoutLimit(timeout)
+        ConditionWatcher.waitForCondition(object : Instruction() {
+
+            override fun getDescription(): String {
+                return "waitForElement"
+            }
+
+            override fun checkCondition(): Boolean {
+                try {
+                    interaction.check(matches(isDisplayed()))
+                    return true
+                } catch (ex: NoMatchingViewException) {
+                    return false
+                }
+
+            }
+        })
+        return interaction
+    }
+
+    /*
+    Helper method that can be used with the DataInteraction type.
+     */
+
+    fun waitForElement(
+            interaction: DataInteraction,
+            timeout: Int = 5000): DataInteraction {
         ConditionWatcher.setTimeoutLimit(timeout)
         ConditionWatcher.waitForCondition(object : Instruction() {
 
@@ -213,4 +243,17 @@ object ConditionWatchers {
         })
         return interaction
     }
+
+    fun isDrawerNotDisplayed(): Boolean {
+        try {
+            onView(withId(R.id.nav_view)).check(matches(isDisplayed()))
+                    return false
+        } catch (ex: NoMatchingViewException) {
+            return true
+        }
+    }
+
+
+
 }
+

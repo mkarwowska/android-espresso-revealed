@@ -154,6 +154,9 @@ private const val FOUR_SECONDS = 4000
 fun ViewInteraction.wait(): ViewInteraction =
         ConditionWatchers.waitForElement(this, FOUR_SECONDS)
 
+fun DataInteraction.wait(): DataInteraction =
+        ConditionWatchers.waitForElement(this, FOUR_SECONDS)
+
 fun ViewInteraction.waitFullyVisible(): ViewInteraction =
         ConditionWatchers.waitForElementFullyVisible(this, FOUR_SECONDS)
 
