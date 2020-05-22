@@ -1,9 +1,11 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter1.actions
 
 import android.support.test.espresso.Espresso
+import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers
+import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.v7.widget.RecyclerView
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.test.BaseTest
@@ -18,7 +20,7 @@ import org.junit.Test
  * Demonstrates [RecyclerView] actions usage.
  */
 class RecyclerViewActionsTest : BaseTest() {
-    private val todoSavedSnackbar = Espresso.onView(ViewMatchers.withText(R.string.successfully_saved_task_message))
+    private val todoSavedSnackbar = onView(withText(R.string.successfully_saved_task_message))
 
     @Test
     @Throws(Exception::class)
