@@ -245,14 +245,13 @@ object ConditionWatchers {
     }
 
     fun isDrawerNotDisplayed(): Boolean {
-        try {
+        return try {
             onView(withId(R.id.nav_view)).check(matches(isDisplayed()))
-                    return false
+            false
         } catch (ex: NoMatchingViewException) {
-            return true
+            true
         }
     }
-
 
 
 }

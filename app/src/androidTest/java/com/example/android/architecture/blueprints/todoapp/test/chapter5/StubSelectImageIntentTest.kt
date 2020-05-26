@@ -43,10 +43,10 @@ class StubSelectImageIntentTest {
     @Test
     fun stubsImageIntentWithDrawable() {
         val toDoImage =
-                com.example.android.architecture.blueprints.todoapp.mock.test.R.drawable.todo_image_drawable
+ //               com.example.android.architecture.blueprints.todoapp.mock.test.R.drawable.todo_image_drawable
 
         Intents.intending(not(isInternal()))
-                .respondWith(IntentHelper.createImageResultFromDrawable(toDoImage))
+   //             .respondWith(IntentHelper.createImageResultFromDrawable(toDoImage))
 
         // Adding new TO-DO.
         addFab.click()
