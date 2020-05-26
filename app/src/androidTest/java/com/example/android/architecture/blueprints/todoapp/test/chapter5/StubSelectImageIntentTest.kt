@@ -86,4 +86,31 @@ class StubSelectImageIntentTest {
         editDoneFab.click()
         viewWithText(toDoTitle).click()
     }
+
+    //Exercise 16a - wrong intended action
+    @Test
+    fun stubsImageIntentWithAsset16a() {
+        val imageFromAssets = "todo_image_assets.png"
+
+        Intents.intending(not(isInternal()))
+                .respondWith(IntentHelper.createImageResultFromAssets(imageFromAssets))
+
+        // Adding new TO-DO.
+        addFab.click()
+
+        // Validate that intent to start AddEditTaskActivity was sent.
+        intended(hasComponent(AddEditTaskActivity::class.java.name))
+
+        taskTitleField.type(toDoTitle).closeKeyboard()
+        taskDescriptionField.type(toDoDescription).closeKeyboard()
+
+        // Click on Get image from gallery button. At this point stubbed image is returned.
+        addImageButton.click()
+
+        // Validate sent intent action.
+        intended(hasAction(Intent.ACTION_ANSWER))
+
+        editDoneFab.click()
+        viewWithText(toDoTitle).click()
+    }
 }
