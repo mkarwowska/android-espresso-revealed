@@ -59,7 +59,7 @@ class StubAllIntentsTest {
 
     //Exercise 16.2 - Verify the share intent functionality based on the intent type and action
     @Test
-    fun stubsShareIntent() {
+    fun stubsShareTextIntent() {
         val allExpectedIntent = (allOf(hasAction(Intent.ACTION_SEND),(hasType("text/plain"))))
         // adding new TO-DO
         addFab.click()
