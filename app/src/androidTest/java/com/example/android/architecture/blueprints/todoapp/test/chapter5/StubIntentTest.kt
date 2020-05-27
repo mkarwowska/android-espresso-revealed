@@ -60,7 +60,7 @@ class StubIntentTest {
         viewWithText(toDoTitle).checkDisplayed()
         openContextualActionModeOverflowMenu()
         shareMenuItem.click()
-        viewWithText(toDoTitle).click()
+//        viewWithText(toDoTitle).click()
     }
 
     @Test
@@ -98,6 +98,6 @@ class StubIntentTest {
         viewWithText(toDoTitle).checkDisplayed()
         openContextualActionModeOverflowMenu()
         shareMenuItem.click()
-        viewWithText(toDoTitle).click()
+       // viewWithText(toDoTitle).click()
     }
 }

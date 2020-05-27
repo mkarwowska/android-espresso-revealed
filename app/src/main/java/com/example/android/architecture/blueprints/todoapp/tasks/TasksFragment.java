@@ -184,11 +184,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
                         .getDefaultSharedPreferences(getContext())
                         .getString("email_text", "");
                 Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, getTaskListAsArray());
                 shareIntent.putExtra(Intent.EXTRA_EMAIL, email);
-                startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.share_to)));
-                //startActivity(shareIntent);
+                //startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.share_to)));
+                startActivity(shareIntent);
                 break;
         }
         return true;

@@ -11,6 +11,7 @@ import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTa
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity
 import com.example.android.architecture.blueprints.todoapp.test.chapter1.data.TestData
 import com.example.android.architecture.blueprints.todoapp.test.chapter3.*
+import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.not
 import org.junit.Before
 import org.junit.Rule
@@ -40,12 +41,12 @@ class StubSelectImageIntentTest {
         toDoDescription = TestData.getToDoDescription()
     }
 
+    //Exercise 15 Change Intent implementation
     @Test
     fun stubsImageIntentWithDrawable() {
         val toDoImage =
-                com.example.android.architecture.blueprints.todoapp.mock.test.R.drawable.todo_image_drawable
-
-        Intents.intending(not(isInternal()))
+               com.example.android.architecture.blueprints.todoapp.mock.test.R.drawable.cookie
+        Intents.intending(hasType("image/*"))
                 .respondWith(IntentHelper.createImageResultFromDrawable(toDoImage))
 
         // Adding new TO-DO.
@@ -59,8 +60,36 @@ class StubSelectImageIntentTest {
         viewWithText(toDoTitle).click()
     }
 
+    //Exercise 15 Change Intent implementation
     @Test
     fun stubsImageIntentWithAsset() {
+        val imageFromAssets = "todo_image_assets.png"
+
+        Intents.intending(hasAction(Intent.ACTION_GET_CONTENT))
+                .respondWith(IntentHelper.createImageResultFromAssets(imageFromAssets))
+
+        // Adding new TO-DO.
+        addFab.click()
+
+        // Validate that intent to start AddEditTaskActivity was sent.
+        intended(hasComponent(AddEditTaskActivity::class.java.name))
+
+        taskTitleField.type(toDoTitle).closeKeyboard()
+        taskDescriptionField.type(toDoDescription).closeKeyboard()
+
+        // Click on Get image from gallery button. At this point stubbed image is returned.
+        addImageButton.click()
+
+        // Validate sent intent action.
+        intended(hasAction(Intent.ACTION_GET_CONTENT))
+
+        editDoneFab.click()
+        viewWithText(toDoTitle).click()
+    }
+
+    //Exercise 16a - wrong intended action
+    @Test
+    fun stubsImageIntentWithAsset16a() {
         val imageFromAssets = "todo_image_assets.png"
 
         Intents.intending(not(isInternal()))
@@ -79,7 +108,7 @@ class StubSelectImageIntentTest {
         addImageButton.click()
 
         // Validate sent intent action.
-        intended(hasAction(Intent.ACTION_GET_CONTENT))
+        intended(hasAction(Intent.ACTION_ANSWER))
 
         editDoneFab.click()
         viewWithText(toDoTitle).click()
