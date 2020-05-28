@@ -114,7 +114,6 @@ class UiAutomatorUiSelectorTest {
 
 
     // Exercise 20.1
-
     @Test
     fun createAndModifiedItemWithUiSelector() {
 
@@ -149,6 +148,16 @@ class UiAutomatorUiSelectorTest {
         // Check that item 1 was edited
         firstTodoItem.click()
         assertTrue("To-Do \"item 1 \" isn't modified.", taskDetailsTitle.text.equals("item 1 modified"))
+    }
 
+
+    @Test
+    fun testExercise() {
+        val item1 = "item 1"
+        val desc = "sdasdadsafsadfaf"
+        uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/fab_add_task")).click()
+        uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/add_task_title")).text = item1
+        uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/add_task_description")).text = desc
+        uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/fab_edit_task_done")).click()
     }
 }

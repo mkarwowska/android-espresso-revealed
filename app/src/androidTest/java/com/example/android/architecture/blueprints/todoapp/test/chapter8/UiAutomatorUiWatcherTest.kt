@@ -1,12 +1,21 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter8
 
 import android.support.test.InstrumentationRegistry
+import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.Espresso.openContextualActionModeOverflowMenu
+import android.support.test.espresso.assertion.ViewAssertions
+import android.support.test.espresso.matcher.ViewMatchers
+import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.test.uiautomator.*
 import android.support.v7.widget.LinearLayoutCompat
 import android.widget.ImageButton
+import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity
+import com.example.android.architecture.blueprints.todoapp.test.chapter3.click
+import org.hamcrest.CoreMatchers.allOf
 import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -25,10 +34,12 @@ class UiAutomatorUiWatcherTest {
 
     @Before
     // Register dialog watcher.
-    fun before() = registerStatisticsDialogWatcher()
+    fun before() = registerShareAppDialogWatcher()
+    //fun before() = registerStatisticsDialogWatcher()
 
     @After
-    fun after() = uiDevice.removeWatcher("StatisticsDialog")
+    fun after() = removeShareAppDialogWatcher()
+    //fun after() = uiDevice.removeWatcher("StatisticsDialog")
 
     @Test
     fun dismissesStatisticsDialogUsingWatcher() {
@@ -65,6 +76,26 @@ class UiAutomatorUiWatcherTest {
                 statistics.text == "You have no tasks.")
     }
 
+    // Exercise 20.3 and 20.4
+    @Test
+    fun openGmailFromShareSection() {
+        val shareMenuItem = onView(allOf(withText("Share"), withId(R.id.title)))
+
+        // Open a contextual menu in the TO-DO list toolbar
+        openContextualActionModeOverflowMenu()
+
+        // Click on share button
+        shareMenuItem.click()
+
+        // UiWatcher is start now
+        val gmailWelcomeText: UiObject = uiDevice.findObject(UiSelector().text("Welcome to Gmail"))
+
+        // Assert expected text is shown.
+        assertTrue("Expected welcome gmail text: \"Welcome to Gmail\" but got: ${gmailWelcomeText.text}",
+                gmailWelcomeText.text == "Welcome to Gmail")
+
+    }
+
     /**
      * Register Statistics dialog watcher that will monitor dialog presence.
      * Dialog will be dismissed when appeared by clicking on OK button.
@@ -76,11 +107,22 @@ class UiAutomatorUiWatcherTest {
         uiDevice.runWatchers()
     }
 
+    private fun registerShareAppDialogWatcher() {
+        uiDevice.registerWatcher("ShareDialog", appToShareChooserDialogWatcher)
+
+        // Run registered watcher.
+        uiDevice.runWatchers()
+    }
+
     /**
      * Remove previously registered Statistics dialog.
      */
     private fun removeStatisticsDialogWatcher() {
         uiDevice.removeWatcher("StatisticsDialog")
+    }
+
+    private fun removeShareAppDialogWatcher() {
+        uiDevice.removeWatcher("ShareDialog")
     }
 
     companion object {
@@ -95,5 +137,15 @@ class UiAutomatorUiWatcherTest {
             }
             false
         }
+
+        val appToShareChooserDialogWatcher = UiWatcher {
+            val gmailAppText = uiDevice.findObject(UiSelector().text("Gmail"))
+            if (null != gmailAppText) {
+                gmailAppText.click()
+                return@UiWatcher true
+            }
+            false
+        }
     }
+
 }
