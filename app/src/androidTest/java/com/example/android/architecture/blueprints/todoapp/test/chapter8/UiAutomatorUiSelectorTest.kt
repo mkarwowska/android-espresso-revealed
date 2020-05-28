@@ -111,4 +111,53 @@ class UiAutomatorUiSelectorTest {
         assertTrue("To-Do \"item 1\" is not shown.", taskDetailsTitle.exists())
         assertTrue("To-Do \"item 1\" title was wrong.", taskDetailsTitle.text.equals("item 1"))
     }
+
+
+    // Exercise 20.1
+    @Test
+    fun createAndModifiedItemWithUiSelector() {
+
+        val fabAddTask = uiDevice.findObject(UiSelector().resourceId(
+                "com.example.android.architecture.blueprints.todoapp.mock:id/fab_add_task"))
+        val taskTitle = uiDevice.findObject(UiSelector().resourceId(
+                "com.example.android.architecture.blueprints.todoapp.mock:id/add_task_title"))
+        val fabDone = uiDevice.findObject(UiSelector().resourceId(
+                "com.example.android.architecture.blueprints.todoapp.mock:id/fab_edit_task_done"))
+        val todoSavedText = uiDevice.findObject(UiSelector().text("TO-DO saved"))
+        val fabEditTask = uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/fab_edit_task"))
+        val firstTodoItem = uiDevice.findObject(UiSelector().className(RecyclerView::class.java.name)
+                .childSelector(UiSelector().className(LinearLayout::class.java)).instance(0))
+        val taskDetailsTitle = uiDevice.findObject(UiSelector().resourceId(
+                "com.example.android.architecture.blueprints.todoapp.mock:id/task_detail_title"))
+
+
+        // Add To-Do item.
+        fabAddTask.click()
+        taskTitle.text = "item 1"
+        fabDone.click()
+        todoSavedText.waitUntilGone(fourSecondsTimeout)
+
+        // Edit To-Do item.
+        firstTodoItem.click()
+        fabEditTask.click()
+        taskTitle.clearTextField()
+        taskTitle.text = "item 1 modified"
+        fabDone.click()
+        todoSavedText.waitUntilGone(fourSecondsTimeout)
+
+        // Check that item 1 was edited
+        firstTodoItem.click()
+        assertTrue("To-Do \"item 1 \" isn't modified.", taskDetailsTitle.text.equals("item 1 modified"))
+    }
+
+
+    @Test
+    fun testExercise() {
+        val item1 = "item 1"
+        val desc = "sdasdadsafsadfaf"
+        uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/fab_add_task")).click()
+        uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/add_task_title")).text = item1
+        uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/add_task_description")).text = desc
+        uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/fab_edit_task_done")).click()
+    }
 }
