@@ -17,6 +17,7 @@ import android.support.test.uiautomator.Until
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity
 import com.example.android.architecture.blueprints.todoapp.test.chapter1.data.TestData
+import com.example.android.architecture.blueprints.todoapp.test.chapter3.*
 import com.example.android.architecture.blueprints.todoapp.test.chapter4.conditionwatchers.ConditionWatchers.waitForElement
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.Rule
@@ -124,6 +125,34 @@ class RuntimePermissionsUiAutomatorTest {
         onView(withId(R.id.picture)).perform(click())
         waitForElement(onView(withId(R.id.fab_edit_task_done))).perform(click())
         onView(withText(toDoTitle)).check(matches(isDisplayed()))
+    }
+
+    // Exercise 22.3 Open the app and enable camera permission.
+    @Test
+    fun enableCameraPermissionAndCreateToDoTask() {
+
+        val toDoTitle = TestData.getToDoTitle()
+        val fabAddTask = viewWithId(R.id.fab_add_task)
+        val addTaskTitle = viewWithId(R.id.add_task_title)
+        val makePhoto = viewWithId(R.id.makePhoto)
+        val picture = viewWithId(R.id.picture)
+        val fabEditTaskDone = viewWithId(R.id.fab_edit_task_done)
+
+        // Enable camera permission
+        sendApplicationSettingsIntent()
+        enableCameraPermission()
+        launchBackToDoApplication()
+
+        // Add new TO-DO.
+        fabAddTask.click()
+        addTaskTitle.type(toDoTitle).closeKeyboard()
+        makePhoto.click()
+        picture.click()
+        waitForElement(fabEditTaskDone).click()
+
+        // Verify new TO-DO with title is shown in the TO-DO list.
+        viewWithText(toDoTitle).checkDisplayed()
+
     }
 
     private fun sendApplicationSettingsIntent() {
