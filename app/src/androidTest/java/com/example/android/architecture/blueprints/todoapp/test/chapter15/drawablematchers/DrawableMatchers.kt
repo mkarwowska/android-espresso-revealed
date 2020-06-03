@@ -3,7 +3,7 @@ package com.example.android.architecture.blueprints.todoapp.test.chapter15.drawa
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
-import android.support.test.espresso.matcher.BoundedMatcher
+import androidx.test.espresso.matcher.BoundedMatcher
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView

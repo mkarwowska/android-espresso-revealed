@@ -4,11 +4,11 @@ import android.app.ActivityManager
 import android.app.ActivityManager.ProcessErrorStateInfo.CRASHED
 import android.app.ActivityManager.ProcessErrorStateInfo.NOT_RESPONDING
 import android.content.Context
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.PerformException
-import android.support.test.uiautomator.By
-import android.support.test.uiautomator.UiDevice
-import android.support.test.uiautomator.Until
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.espresso.PerformException
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.Until
 
 /**
  * Provides package helper methods.

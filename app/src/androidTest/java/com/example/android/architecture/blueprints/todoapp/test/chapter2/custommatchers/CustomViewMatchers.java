@@ -1,6 +1,6 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter2.custommatchers;
 
-import android.support.test.espresso.matcher.BoundedMatcher;
+import androidx.test.espresso.matcher.BoundedMatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;

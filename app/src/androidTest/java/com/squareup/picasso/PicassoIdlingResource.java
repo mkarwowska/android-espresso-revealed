@@ -3,9 +3,9 @@ package com.squareup.picasso;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.test.espresso.IdlingResource;
-import android.support.test.runner.lifecycle.ActivityLifecycleCallback;
-import android.support.test.runner.lifecycle.Stage;
+import androidx.test.espresso.IdlingResource;
+import androidx.test.runner.lifecycle.ActivityLifecycleCallback;
+import androidx.test.runner.lifecycle.Stage;
 
 import java.lang.ref.WeakReference;
 

@@ -1,9 +1,9 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter2.customfailurehandler;
 
 import android.content.Context;
-import android.support.test.espresso.FailureHandler;
-import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.base.DefaultFailureHandler;
+import androidx.test.espresso.FailureHandler;
+import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.base.DefaultFailureHandler;
 import android.view.View;
 
 import org.hamcrest.Matcher;
