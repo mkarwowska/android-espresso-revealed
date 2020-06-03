@@ -4,7 +4,6 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
@@ -12,6 +11,8 @@ import androidx.test.uiautomator.UiSelector
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity
 import org.junit.Assert.assertFalse
+import com.google.common.truth.Truth.assertThat
+
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -34,7 +34,7 @@ android {
 
         release {
             minifyEnabled true
-            useProguard true
+            //useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
@@ -89,6 +89,7 @@ dependencies {
     implementation "com.google.guava:guava:$rootProject.guavaVersion"
     implementation 'androidx.room:room-runtime:2.0.0'
     implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
+    implementation 'com.google.guava:guava:28.1-android'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.0.0'
@@ -100,6 +101,8 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.1.1'
     androidTestImplementation 'androidx.room:room-testing:2.0.0'
     androidTestImplementation 'androidx.test:core:1.1.0'
+    androidTestImplementation 'com.google.truth:truth:1.0'
+
 
     // Espresso UI Testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
