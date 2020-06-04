@@ -1,11 +1,11 @@
 package com.example.android.architecture.blueprints.todoapp.test
 
 import android.Manifest
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso.setFailureHandler
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.espresso.Espresso.setFailureHandler
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity
 import com.example.android.architecture.blueprints.todoapp.test.chapter2.customfailurehandler.CustomFailureHandler
 import com.example.android.architecture.blueprints.todoapp.test.chapter2.screenshotwatcher.ScreenshotWatcher
@@ -17,6 +17,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 open class BaseTest {
+
 
     /**
      * Provided activity will be launched before each test.

@@ -1,12 +1,12 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter8
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.test.uiautomator.By
-import android.support.test.uiautomator.UiDevice
-import android.support.test.uiautomator.Until
-import android.support.v7.widget.RecyclerView
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.Until
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity
 import org.junit.Assert.assertTrue
 import org.junit.Rule

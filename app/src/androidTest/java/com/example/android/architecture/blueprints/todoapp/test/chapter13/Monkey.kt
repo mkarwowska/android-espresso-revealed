@@ -1,7 +1,7 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter13
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.uiautomator.UiDevice
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 
 /**
  * Class that keeps Monkey tests logic and main actions.

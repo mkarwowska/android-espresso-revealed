@@ -5,7 +5,7 @@ import android.app.Instrumentation
 import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
-import android.support.test.InstrumentationRegistry
+import androidx.test.platform.app.InstrumentationRegistry
 import java.io.File
 import java.io.FileOutputStream
 

@@ -1,8 +1,8 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter2.custommatchers;
 
-import android.support.test.espresso.intent.Checks;
-import android.support.test.espresso.matcher.BoundedMatcher;
-import android.support.v7.widget.RecyclerView;
+import androidx.test.espresso.intent.Checks;
+import androidx.test.espresso.matcher.BoundedMatcher;
+import androidx.recyclerview.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.android.architecture.blueprints.todoapp.R;

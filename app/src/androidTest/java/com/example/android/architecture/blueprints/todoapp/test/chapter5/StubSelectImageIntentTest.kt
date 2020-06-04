@@ -1,10 +1,10 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter5
 
 import android.content.Intent
-import android.support.test.espresso.intent.Intents
-import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.matcher.IntentMatchers.*
-import android.support.test.espresso.intent.rule.IntentsTestRule
+import androidx.test.espresso.intent.Intents
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.matcher.IntentMatchers.*
+import androidx.test.espresso.intent.rule.IntentsTestRule
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.R.id.getImage
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity

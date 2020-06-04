@@ -1,10 +1,15 @@
 # Some methods are only called from tests, so make sure the shrinker keeps them.
 -keep class com.example.android.architecture.blueprints.** { *; }
--keep class android.support.v4.widget.DrawerLayout { *; }
--keep class android.support.test.espresso.IdlingResource { *; }
--keep class android.support.test.espresso.IdlingRegistry { *; }
+-keep class androidx.test.espresso.IdlingResource { *; }
+-keep class androidx.test.espresso.IdlingRegistry { *; }
 -keep class com.google.common.base.Preconditions { *; }
+-keep class com.google.common.collect.CollectPreconditions { *; }
 -keep class android.arch.** { *; }
+
+#-keepclasseswithmembers public class androidx.test.espresso.contrib.RecyclerViewActions { *; }
+-keepclasseswithmembers public class androidx.recyclerview.widget.RecyclerView { *; }
+-keepclasseswithmembers public class androidx.viewpager.widget.ViewPager { *; }
+-keepclasseswithmembers public class com.google.common.collect.CollectPreconditions { *; }
 
 # For Guava:
 -dontwarn javax.annotation.**
@@ -13,7 +18,6 @@
 
 # Proguard rules that are applied to your test apk/code.
 -ignorewarnings
-
 -keepattributes *Annotation*
 
 -dontnote junit.framework.**
@@ -27,6 +31,11 @@
 # Uncomment this if you use Mockito
 -dontwarn org.mockito.**
 
--keepclasseswithmembers public class android.support.**
+# add description why TODO
+#-keepclasseswithmembers public class android.support.**
+-keepclasseswithmembers final class com.google.common.collect.CollectPreconditions { *; }
+-keep class com.google.common.** { *; }
+-keep class java.lang.** { *; }
 -keep class com.android.** { *; }
--keep class android.support.** { *; }
+-keep class androidx.test.** { *; }
+

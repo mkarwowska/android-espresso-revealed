@@ -1,13 +1,13 @@
 package com.example.android.architecture.blueprints.todoapp.test.chapter11.screens
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.Espresso.openContextualActionModeOverflowMenu
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.contrib.RecyclerViewActions.actionOnHolderItem
-import android.support.test.espresso.contrib.RecyclerViewActions.scrollToHolder
-import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.v7.widget.RecyclerView
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openContextualActionModeOverflowMenu
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnHolderItem
+import androidx.test.espresso.contrib.RecyclerViewActions.scrollToHolder
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.test.chapter11.testdata.TodoItem
 import com.example.android.architecture.blueprints.todoapp.test.chapter2.customactions.CustomRecyclerViewActions.ClickTodoCheckBoxWithTitleViewAction.clickTodoCheckBoxWithTitle
