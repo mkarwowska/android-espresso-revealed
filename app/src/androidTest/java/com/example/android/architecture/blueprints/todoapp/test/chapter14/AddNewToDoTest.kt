@@ -18,6 +18,9 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class AddNewToDoTest {
 
+    // Exercise 29 - page 280
+    // Implement a test that launches ActivityScenario in the @Before method
+
     @Before
     fun launchTasksActivity() {
         ActivityScenario.launch(TasksActivity::class.java)

@@ -27,12 +27,20 @@ class examplesForFailTest {
         ActivityScenario.launch(TasksActivity::class.java)
     }
 
+    /**
+     * Specifically fails the test using JUnit assertion.
+     */
+
     @Test
     fun exampleTestToGenerateJunitAssertionErros() {
         onView(ViewMatchers.withId(R.id.fab_add_task)).perform(ViewActions.click())
         val selector = uiDevice.findObject(UiSelector().resourceId("com.example.android.architecture.blueprints.todoapp.mock:id/add_task_title"))
         assertFalse("element with selector $selector is present on the screen when it should not", selector.exists())
     }
+
+    /**
+     * Specifically fails the test using Truth assertion.
+     */
 
     @Test
     fun exampleTestToGenerateTruthAssertionErros() {
